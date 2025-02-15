@@ -6,9 +6,16 @@ pip install nvitop # nvitop -m
 cd ..
 ```
 ## Launch Training (New Version)
-
+- dataset
+  - Sky-T1-HF
+  - VD-QWQ-Clean-8k
+  - VD-QWQ-Clean-16k
+  - VD-DS-Clean-8k
+  - 
 ```shell
-CUDA_VISIBLE_DEVICES=3 python -m torch.distributed.run --nnodes 1 --node_rank 0 --nproc_per_node 2 --master_addr 127.0.0.1 --master_port 29501 train.py --model_name_or_path Qwen/Qwen2.5-7B-Instruct --run_name qwen2_3B_full_sft_5e-6 --dataset Sky-T1-HF
+CUDA_VISIBLE_DEVICES=3 python -m torch.distributed.run --nnodes 1 --node_rank 0 --nproc_per_node 2 --master_addr 127.0.0.1 --master_port 29501 train.py --model_name_or_path Qwen/Qwen2.5-7B-Instruct --run_name qwen2_7B_full_sft_1e-5 --dataset Sky-T1-HF
+
+CUDA_VISIBLE_DEVICES=3,4 python -m torch.distributed.run --nnodes 1 --node_rank 0 --nproc_per_node 2 --master_addr 127.0.0.1 --master_port 29500 train.py --model_name_or_path Qwen/Qwen2.5-7B-Instruct --run_name qwen2_7B_full_sft_1e-5 --dataset VD-QWQ-Clean-8k
 
 # dataset: LLaMA-Factory/data/dataset_info.json, refer to My-VD-QWQ
 ```
@@ -25,7 +32,7 @@ DEFAULT_CONFIG_DICT = {
     'finetuning_type': 'full', 
     'deepspeed': 'examples/deepspeed/ds_z3_offload_config.json', 
     'dataset': 'Sky-T1-HF', 
-    'template': 'qwen25', 
+    'template': 'qwen', 
     'cutoff_len': 16384, 
     'max_samples': 1000000, 
     'overwrite_cache': True, 

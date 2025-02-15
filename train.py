@@ -14,7 +14,7 @@ DEFAULT_CONFIG_DICT = {
     "finetuning_type": "full",
     "deepspeed": "examples/deepspeed/ds_z3_offload_config.json",
     "dataset": "Sky-T1-HF",
-    "template": "qwen25",
+    "template": "qwen",
     "cutoff_len": 16384,
     "max_samples": 1000000,
     "overwrite_cache": True,
