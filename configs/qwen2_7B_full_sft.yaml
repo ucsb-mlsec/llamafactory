@@ -36,3 +36,7 @@ ddp_timeout: 180000000
 report_to: wandb
 run_name: qwen2_7B_full_sft_1e-5
 
+# hub
+push_to_hub: true
+hub_strategy: all_checkpoints
+# push_to_hub_organization: your organization

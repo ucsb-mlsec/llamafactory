@@ -31,6 +31,9 @@ DEFAULT_CONFIG_DICT = {
     "bf16": True,
     "ddp_timeout": 180000000,
     "report_to": "wandb",
+    "push_to_hub": False,
+    "push_to_hub_organization": "secmlr",
+    "hub_strategy": "all_checkpoints",
 }
 
 
@@ -49,6 +52,9 @@ if __name__ == "__main__":
     parser.add_argument("--run_name", type=str, help="Run name")
     parser.add_argument("--output_dir", type=str, help="Output directory")
     parser.add_argument("--dataset", type=str, help="Dataset name")
+    parser.add_argument("--hub_strategy", type=str, help="strategy for push to hub")
+    parser.add_argument("--push_to_hub", action="store_true", help="Push to hub")
+    parser.add_argument("--push_to_hub_organization", type=str, help="Dataset name")
 
     args, unknown_args = parser.parse_known_args()
     if args.config:
