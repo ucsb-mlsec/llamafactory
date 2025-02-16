@@ -12,7 +12,7 @@ DEFAULT_CONFIG_DICT = {
     "stage": "sft",
     "do_train": True,
     "finetuning_type": "full",
-    "deepspeed": "examples/deepspeed/ds_z3_offload_config.json",
+    "deepspeed": "examples/deepspeed/ds_z3_config.json",
     "dataset": "Sky-T1-HF",
     "template": "qwen",
     "cutoff_len": 16384,
@@ -20,7 +20,7 @@ DEFAULT_CONFIG_DICT = {
     "overwrite_cache": True,
     "preprocessing_num_workers": 16,
     "logging_steps": 1,
-    "save_steps": 600,
+    "save_steps": 200,
     "plot_loss": True,
     "per_device_train_batch_size": 1,
     "gradient_accumulation_steps": 12,
@@ -68,7 +68,7 @@ if __name__ == "__main__":
             if not getattr(args, arg):
                 raise ValueError(f"Argument {arg} is required")
         if not getattr(args, "output_dir"):
-            args.output_dir = f"./result/model/{args.run_name}"
+            args.output_dir = f"./result/{args.dataset}/{args.run_name}"
         for key, value in vars(args).items():
             if value is not None:
                 config[key] = value
