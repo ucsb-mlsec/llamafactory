@@ -32,7 +32,6 @@ DEFAULT_CONFIG_DICT = {
     "ddp_timeout": 180000000,
     "report_to": "wandb",
     "push_to_hub": False,
-    "push_to_hub_organization": "secmlr",
     "hub_strategy": "all_checkpoints",
 }
 
@@ -54,7 +53,7 @@ if __name__ == "__main__":
     parser.add_argument("--dataset", type=str, help="Dataset name")
     parser.add_argument("--hub_strategy", type=str, help="strategy for push to hub")
     parser.add_argument("--push_to_hub", action="store_true", help="Push to hub")
-    parser.add_argument("--push_to_hub_organization", type=str, help="Dataset name")
+    parser.add_argument("--push_to_hub_organization", type=str, help="Push to hub organization")
 
     args, unknown_args = parser.parse_known_args()
     if args.config:
@@ -75,6 +74,15 @@ if __name__ == "__main__":
                 raise ValueError(f"Argument {arg} is required")
         if not getattr(args, "output_dir"):
             args.output_dir = f"./result/{args.dataset}/{args.run_name}"
+        if args.push_to_hub:
+            if not args.push_to_hub_organization:
+                args.push_to_hub_model_id = f"{args.dataset}_{args.run_name}"
+            else:
+                args.push_to_hub_model_id = (
+                    f"{args.push_to_hub_organization}/{args.dataset}_{args.run_name}"
+                )
+                # set push_to_hub_organization to None because huggingface deprecated this argument
+                args.push_to_hub_organization = None
         for key, value in vars(args).items():
             if value is not None:
                 config[key] = value

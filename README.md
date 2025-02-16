@@ -13,13 +13,33 @@ cd ..
   - VD-DS-Clean-8k
   - 
 ```shell
-CUDA_VISIBLE_DEVICES=1,2 python -m torch.distributed.run --nnodes 1 --node_rank 0 --nproc_per_node 2 --master_addr 127.0.0.1 --master_port 29501 train.py --model_name_or_path Qwen/Qwen2.5-7B-Instruct --run_name qwen2_7B_full_sft_1e-5 --dataset Sky-T1-HF --push_to_hub
+CUDA_VISIBLE_DEVICES=1,2 torchrun --nnodes 1 \
+--node_rank 0 \
+--nproc_per_node 2 \
+--master_addr 127.0.0.1 \
+--master_port 29501 \
+train.py \
+--model_name_or_path Qwen/Qwen2.5-7B-Instruct \
+--run_name qwen2_7B_full_sft_1e-5 \
+--dataset Sky-T1-HF \
+--push_to_hub \
+--push_to_hub_organization secmlr
 
-CUDA_VISIBLE_DEVICES=3,4 python -m torch.distributed.run --nnodes 1 --node_rank 0 --nproc_per_node 2 --master_addr 127.0.0.1 --master_port 29500 train.py --model_name_or_path Qwen/Qwen2.5-7B-Instruct --run_name qwen2_7B_full_sft_1e-5 --dataset VD-QWQ-Clean-8k --push_to_hub
+CUDA_VISIBLE_DEVICES=3,4 torchrun --nnodes 1 \
+--node_rank 0 \
+--nproc_per_node 2 \
+--master_addr 127.0.0.1 \
+--master_port 29500 \
+train.py \
+--model_name_or_path Qwen/Qwen2.5-7B-Instruct \
+--run_name qwen2_7B_full_sft_1e-5 \
+--dataset VD-QWQ-Clean-8k \
+--push_to_hub \
+--push_to_hub_organization secmlr
 
-# dataset: LLaMA-Factory/data/dataset_info.json, refer to My-VD-QWQ
+# dataset: LLaMA-Factory/data/dataset_info.json, refer to VD-QWQ-Clean-8k
 ```
-model_name_or_path, run_name and dataset are required. Besides, if output_dir is not specified, the training loges will be save at ./result/model/{args.run_name}.
+model_name_or_path, run_name and dataset are required. Besides, if output_dir is not specified, the training loges will be save at ./result/{args.dataset}/{args.run_name}.
 
 A default set of training parameters, called DEFAULT_CONFIG_DICT, are provided. You can pass arguments in the DEFAULT_CONFIG_DICT to overwrite them. You can also pass arguments that are not in DEFAULT_CONFIG_DICT but supported by LLaMA-Factory.
 
@@ -50,6 +70,20 @@ DEFAULT_CONFIG_DICT = {
     'ddp_timeout': 180000000, 
     'report_to': 'wandb', 
     }
+```
+for example, if you want to sft 32B model with deepspeed zero3 offload, you can use the following command:
+
+```shell
+CUDA_VISIBLE_DEVICES=3,4 torchrun --nnodes 1 \
+--node_rank 0 \
+--nproc_per_node 2 \
+--master_addr 127.0.0.1 \
+--master_port 29500 \
+train.py \
+--model_name_or_path Qwen/Qwen2.5-32B-Instruct \
+--run_name qwen2_7B_full_sft_1e-5 \
+--dataset VD-QWQ-Clean-8k \
+--deepspeed examples/deepspeed/ds_z3_offload_config.json
 ```
 
 You can still use the yaml files if you want (if is provided, all other arguments will be ignored). Here is an example:
