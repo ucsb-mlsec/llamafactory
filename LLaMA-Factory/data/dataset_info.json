@@ -632,25 +632,5 @@
             "prompt": "content"
         },
         "folder": "python"
-    },
-    "My-Sky-T1": {
-        "file_name": "../../../../data/train_data.json",
-        "formatting": "sharegpt",
-        "columns": {
-            "messages": "conversations",
-            "system": "system"
-        },
-        "tags": {
-            "role_tag": "from",
-            "content_tag": "value",
-            "user_tag": "user",
-            "assistant_tag": "assistant"
-        }
-    },
-    "WebInstruct-CFT-4K": {
-        "file_name": "WebInstruct-CFT-4K.json"
-    },
-    "WebInstruct-CFT-50K": {
-        "file_name": "WebInstruct-CFT-50K.json"
     }
 }
