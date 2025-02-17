@@ -11,7 +11,8 @@ cd ..
   - VD-QWQ-Clean-8k
   - VD-QWQ-Clean-16k
   - VD-DS-Clean-8k
-  - 
+  - VD-QWQ-Noisy-Small-16k
+  - VD-QWQ-Noisy-Small-8k
 ```shell
 CUDA_VISIBLE_DEVICES=1,2 torchrun --nnodes 1 \
 --node_rank 0 \
