@@ -28,7 +28,7 @@
         }
     },
     "VD-QWQ-Noisy-Small-8k": {
-        "hf_hub_url": "secmlr/noisy_datasets_filtered_QwQ-32B-Preview_small_train_len_8000_inputlen_5000",
+        "hf_hub_url": "secmlr/noisy_dataset_filtered_QwQ-32B-Preview_small_train_len_8000_inputlen_5000",
         "formatting": "sharegpt",
         "columns": {
             "messages": "conversations",
@@ -42,7 +42,7 @@
         }
     },
     "VD-QWQ-Noisy-Small-16k": {
-        "hf_hub_url": "secmlr/noisy_datasets_filtered_QwQ-32B-Preview_small_train_len_16000_inputlen_5000",
+        "hf_hub_url": "secmlr/noisy_dataset_filtered_QwQ-32B-Preview_small_train_len_16000_inputlen_5000",
         "formatting": "sharegpt",
         "columns": {
             "messages": "conversations",
