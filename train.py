@@ -33,7 +33,7 @@ DEFAULT_CONFIG_DICT = {
     "ddp_timeout": 180000000,
     "report_to": "wandb",
     "push_to_hub": False,
-    "hub_strategy": "all_checkpoints",
+    "hub_strategy": "every_save",
 }
 
 
