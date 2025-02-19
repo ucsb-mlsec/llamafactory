@@ -29,9 +29,9 @@ train.py \
 --push_to_hub \
 --push_to_hub_organization secmlr
 
-CUDA_VISIBLE_DEVICES=3,4 torchrun --nnodes 1 \
+CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nnodes 1 \
 --node_rank 0 \
---nproc_per_node 2 \
+--nproc_per_node 4 \
 --master_addr 127.0.0.1 \
 --master_port 29500 \
 train.py \
@@ -104,54 +104,8 @@ You can still use the yaml files if you want (if is provided, all other argument
 CUDA_VISIBLE_DEVICES=3 python -m torch.distributed.run --nnodes 1 --node_rank 0 --nproc_per_node 1 --master_addr 127.0.0.1 --master_port 29501 train.py --config configs/qwen2_3B_full_sft.yaml
 ```
 
-## Launch Training (Old Version)
+## gpu monitor
 
 ```shell
-cd LLaMA-Factory
-# 32B
-CUDA_VISIBLE_DEVICES=0,2,3,4 MASTER_PORT=29501 \
-llamafactory-cli train ../configs/qwen2_full_sft.yaml
-# mix data
-CUDA_VISIBLE_DEVICES=0,1,2,3 MASTER_PORT=29500 \
-llamafactory-cli train ../configs/vd_qwq_sky_qwen2_full_sft.yaml
-
-# 3b
-CUDA_VISIBLE_DEVICES=4,5 MASTER_PORT=29502 \
-llamafactory-cli train ../configs/qwen2_3B_full_sft.yaml
-# 7b
-CUDA_VISIBLE_DEVICES=0,1,2,3 MASTER_PORT=29501 \
-llamafactory-cli train ../configs/qwen2_7B_full_sft.yaml
-# 7b coder
-CUDA_VISIBLE_DEVICES=4,5,6,7 MASTER_PORT=29500 \
-llamafactory-cli train ../configs/qwen2_coder_7B_full_sft.yaml
-
-# lora for 32B
-CUDA_VISIBLE_DEVICES=4,5,6,7 MASTER_PORT=29501 \
-llamafactory-cli train ../configs/qwen2_32B_lora_sft.yaml
-
-# repro pipeline
-CUDA_VISIBLE_DEVICES=0,1,2,3 MASTER_PORT=29501 \
-llamafactory-cli train ../configs/qwen2_my_full_sft.yaml
-
-# our dataset 32B
-CUDA_VISIBLE_DEVICES=4,5,6,7 MASTER_PORT=29500 \
-llamafactory-cli train ../configs/vd_ds_qwen2_full_sft.yaml
-# qwq
-CUDA_VISIBLE_DEVICES=6,7 MASTER_PORT=29500 \
-llamafactory-cli train ../configs/vd_qwq_qwen2_full_sft.yaml
-
-# our dataset 7B
-CUDA_VISIBLE_DEVICES=0,1,2,3 MASTER_PORT=29501 \
-llamafactory-cli train ../configs/vd_ds_qwen2_7b_full_sft.yaml
-
-CUDA_VISIBLE_DEVICES=4,5,6,7 MASTER_PORT=29501 \
-llamafactory-cli train ../configs/qwen2_full_simpo.yaml
-
-python gpu_monitor.py --interval 30 "MASTER_PORT=29501 llamafactory-cli train ../configs/vd_ds_qwen2_full_sft.yaml"
+python ../test/gpu_monitor.py --interval 30 --gpu_num 4 --percentage 92 "torchrun --nnodes 1 --node_rank 0 --nproc_per_node 4 --master_addr 127.0.0.1 --master_port 29500 train.py --model_name_or_path Qwen/Qwen2.5-7B-Instruct --run_name qwen2_7B_full_sft_1e-5 --dataset VD-QWQ-Clean-8k --push_to_hub --push_to_hub_organization secmlr"
 ```
-
-| Metric       | Sky-T1-32B-Preview | my-32B-240 | 32B  | my-7B-720 | 7B    | 3B   | QwQ  | ds-r1 | o1-preview |
-|--------------|--------------------|------------|------|-----------|-------|------|------|-------|------------|
-| Math500      | 87.6               | 86.4       | 82.2 | 65.2      | 76.4  | 63.8 | 90.8 |       | 81.4       |
-| AIME2024     | 46.67              | 33.33      | 23.3 | 13.33     | 10.0  | 6.67 | 40.0 |       | 40.0       |
-| GPQA-Diamond | 51.01              | 50.0       | 44.4 | 27.27     | 34.85 | 29.8 | 54.0 |       | 75.2       |

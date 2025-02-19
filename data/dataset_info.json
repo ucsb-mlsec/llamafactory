@@ -1,6 +1,6 @@
 {
     "VD-QWQ-Clean-16k": {
-        "file_name": "/scratch/yuzhou/hongwei/VulnScan-r0/datasets/reasoning_data/clean_dataset/formatted/QwQ-32B-Preview_train_len_16000_inputlen_5000.json",
+        "hf_hub_url": "secmlr/clean_dataset_filtered_QwQ-32B-Preview_train_len_16000_inputlen_5000",
         "formatting": "sharegpt",
         "columns": {
             "messages": "conversations",
@@ -14,7 +14,7 @@
         }
     },
     "VD-QWQ-Clean-8k": {
-        "file_name": "/scratch/yuzhou/hongwei/VulnScan-r0/datasets/reasoning_data/clean_dataset/formatted/QwQ-32B-Preview_train_len_8000_inputlen_5000.json",
+        "hf_hub_url": "secmlr/clean_dataset_filtered_QwQ-32B-Preview_train_len_8000_inputlen_5000",
         "formatting": "sharegpt",
         "columns": {
             "messages": "conversations",
