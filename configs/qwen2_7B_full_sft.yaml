@@ -1,6 +1,6 @@
 ### model
 model_name_or_path: Qwen/Qwen2.5-7B-Instruct
-#use_unsloth_gc: true
+use_unsloth_gc: true
 enable_liger_kernel: true
 
 ### method
@@ -11,6 +11,7 @@ deepspeed: examples/deepspeed/ds_z3_offload_config.json  # choices: [ds_z0_confi
 
 ### dataset
 dataset: Sky-T1-HF
+dataset_dir: ../data
 template: qwen
 cutoff_len: 16384
 max_samples: 1000000
@@ -18,7 +19,7 @@ overwrite_cache: true
 preprocessing_num_workers: 16
 
 ### output
-output_dir: saves/Qwen-7B/full/original
+output_dir: ./result/lora_7B
 logging_steps: 1
 save_steps: 400
 plot_loss: true
@@ -35,8 +36,3 @@ ddp_timeout: 180000000
 
 report_to: wandb
 run_name: qwen2_7B_full_sft_1e-5
-
-# hub
-push_to_hub: true
-hub_strategy: all_checkpoints
-# push_to_hub_organization: your organization

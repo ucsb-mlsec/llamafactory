@@ -11,6 +11,7 @@ deepspeed: examples/deepspeed/ds_z3_config.json  # choices: [ds_z0_config.json, 
 
 ### dataset
 dataset: WebInstruct-CFT-50K
+dataset_dir: ../data
 template: qwen
 cutoff_len: 2048
 max_samples: 100000
