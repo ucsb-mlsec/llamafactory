@@ -45,7 +45,7 @@ train.py \
 ```
 
 model_name_or_path, run_name and dataset are required. Besides, if output_dir is not specified, the training loges will
-be saved at ./result/{args.dataset}/{args.run_name}.
+be saved at `./result/{args.dataset}/{args.run_name}`.
 
 A default set of training parameters, called DEFAULT_CONFIG_DICT, are provided. You can pass arguments in the
 DEFAULT_CONFIG_DICT to overwrite them. You can also pass arguments that are not in DEFAULT_CONFIG_DICT but supported by
