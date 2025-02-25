@@ -69,17 +69,26 @@ if __name__ == "__main__":
             raise ValueError(f"Invalid config file: {args.config}")
         with open(args.config) as f:
             config = yaml.load(f, Loader=yaml.FullLoader)
+        # overwrite config with command line arguments
+        delattr(args, "config")
+        config.update({k: v for k, v in vars(args).items() if v or k not in config})
         args = argparse.Namespace(**config)
+        dataset_name = args.dataset.replace(",", "_")
+        if not getattr(args, "output_dir"):
+            args.output_dir = f"./result/{dataset_name}/{args.run_name}"
+        if args.push_to_hub and not args.push_to_hub_model_id:
+            args.push_to_hub_model_id = f"{dataset_name}_{args.run_name}"
     else:
         config = DEFAULT_CONFIG_DICT
         required_args = ["model_name_or_path", "run_name", "dataset"]
         for arg in required_args:
             if not getattr(args, arg):
                 raise ValueError(f"Argument {arg} is required")
+        dataset_name = args.dataset.replace(",", "_")
         if not getattr(args, "output_dir"):
-            args.output_dir = f"./result/{args.dataset}/{args.run_name}"
+            args.output_dir = f"./result/{dataset_name}/{args.run_name}"
         if args.push_to_hub and not args.push_to_hub_model_id:
-            args.push_to_hub_model_id = f"{args.dataset}_{args.run_name}"
+            args.push_to_hub_model_id = f"{dataset_name}_{args.run_name}"
         for key, value in vars(args).items():
             if value is not None:
                 config[key] = value
