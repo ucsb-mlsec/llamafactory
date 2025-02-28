@@ -108,7 +108,7 @@
         }
     },
     "VD-QWQ-Clean-8k_qwen2_7B_full_sft_1e-5_train_dpo": {
-        "hf_hub_url": "VD-QWQ-Clean-8k_qwen2_7B_full_sft_1e-5_train_dpo",
+        "hf_hub_url": "secmlr/VD-QWQ-Clean-8k_qwen2_7B_full_sft_1e-5_train_dpo",
         "ranking": true,
         "formatting": "sharegpt",
         "columns": {
