@@ -24,8 +24,9 @@ CUDA_VISIBLE_DEVICES=1,2 torchrun --nnodes 1 \
 --master_port 29501 \
 train.py \
 --model_name_or_path Qwen/Qwen2.5-7B-Instruct \
---run_name qwen2_7B_full_sft_1e-5 \
+--run_name full_sft_1e-5 \
 --dataset Sky-T1-HF \
+
 --push_to_hub \
 --push_to_hub_organization secmlr
 
@@ -36,7 +37,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nnodes 1 \
 --master_port 29500 \
 train.py \
 --model_name_or_path Qwen/Qwen2.5-7B-Instruct \
---run_name qwen2_7B_full_sft_1e-5 \
+--run_name full_sft_1e-5 \
 --dataset VD-QWQ-Clean-8k \
 --push_to_hub \
 --push_to_hub_organization secmlr
@@ -45,7 +46,7 @@ train.py \
 ```
 
 model_name_or_path, run_name and dataset are required. Besides, if output_dir is not specified, the training loges will
-be saved at `./result/{args.dataset}/{args.run_name}`.
+be saved at `./result/{args.dataset}/{model_short_name}_{args.run_name}`.
 
 A default set of training parameters, called DEFAULT_CONFIG_DICT, are provided. You can pass arguments in the
 DEFAULT_CONFIG_DICT to overwrite them. You can also pass arguments that are not in DEFAULT_CONFIG_DICT but supported by
@@ -93,7 +94,7 @@ CUDA_VISIBLE_DEVICES=3,4 torchrun --nnodes 1 \
 --master_port 29500 \
 train.py \
 --model_name_or_path Qwen/Qwen2.5-32B-Instruct \
---run_name qwen2_7B_full_sft_1e-5 \
+--run_name full_sft_1e-5 \
 --dataset VD-QWQ-Clean-8k \
 --deepspeed examples/deepspeed/ds_z3_offload_config.json
 ```

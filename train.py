@@ -1,4 +1,5 @@
-from llamafactory.train.tuner import run_exp
+import json
+
 
 import argparse
 import yaml
@@ -38,6 +39,8 @@ DEFAULT_CONFIG_DICT = {
 
 
 def launch(args_dict: dict):
+    from llamafactory.train.tuner import run_exp
+
     run_exp(args_dict)
 
 
@@ -58,6 +61,7 @@ if __name__ == "__main__":
         "--push_to_hub_organization", type=str, help="Push to hub organization"
     )
     parser.add_argument("--push_to_hub_model_id", type=str, help="Push to hub model id")
+    parser.add_argument("--dataset_full_name", type=str, help="Dataset name")
 
     args, unknown_args = parser.parse_known_args()
     if args.config:
@@ -74,10 +78,15 @@ if __name__ == "__main__":
         config.update({k: v for k, v in vars(args).items() if v or k not in config})
         args = argparse.Namespace(**config)
         dataset_name = args.dataset.replace(",", "_")
+        model_short_name = args.model_name_or_path.split("/")[-1]
         if not getattr(args, "output_dir"):
-            args.output_dir = f"./result/{dataset_name}/{args.run_name}"
+            args.output_dir = (
+                f"./result/{dataset_name}/{model_short_name}_{args.run_name}"
+            )
         if args.push_to_hub and not args.push_to_hub_model_id:
-            args.push_to_hub_model_id = f"{dataset_name}_{args.run_name}"
+            args.push_to_hub_model_id = (
+                f"{dataset_name}_{model_short_name}_{args.run_name}"
+            )
     else:
         config = DEFAULT_CONFIG_DICT
         required_args = ["model_name_or_path", "run_name", "dataset"]
@@ -85,10 +94,15 @@ if __name__ == "__main__":
             if not getattr(args, arg):
                 raise ValueError(f"Argument {arg} is required")
         dataset_name = args.dataset.replace(",", "_")
+        model_short_name = args.model_name_or_path.split("/")[-1]
         if not getattr(args, "output_dir"):
-            args.output_dir = f"./result/{dataset_name}/{args.run_name}"
+            args.output_dir = (
+                f"./result/{dataset_name}/{model_short_name}_{args.run_name}"
+            )
         if args.push_to_hub and not args.push_to_hub_model_id:
-            args.push_to_hub_model_id = f"{dataset_name}_{args.run_name}"
+            args.push_to_hub_model_id = (
+                f"{dataset_name}_{model_short_name}_{args.run_name}"
+            )
         for key, value in vars(args).items():
             if value is not None:
                 config[key] = value
@@ -105,4 +119,42 @@ if __name__ == "__main__":
     args_dict = vars(args)
     logger.info(f"Arguments: {args_dict}")
     os.chdir("LLaMA-Factory")
+
+    # if dataset is not in dataset_info, add it
+    dataset_list = args.dataset.split(",")
+    dataset_full_name_list = (
+        args.dataset_full_name.split(",") if args.dataset_full_name else []
+    )
+    dataset_info_path = Path(args.dataset_dir).resolve() / "dataset_info.json"
+    if not dataset_info_path.exists():
+        raise FileNotFoundError(f"{dataset_info_path} does not exist")
+
+    with open(dataset_info_path, "r", encoding="utf-8") as f:
+        dataset_info = json.load(f)
+
+    for i, dataset in enumerate(dataset_list):
+        if dataset not in dataset_info:
+            if not dataset_full_name_list:
+                raise ValueError(
+                    f"dataset {dataset} is not found in data/dataset_info.json, you need to provide dataset_name as huggingface url or file name"
+                )
+            if len(dataset_full_name_list) != len(dataset_list):
+                raise ValueError(
+                    f"As dataset is not found in data/dataset_info.json, dataset_name should be provided for all datasets, dataset_name should be the same length as dataset, got {len(dataset_list)} dataset and {len(dataset_full_name_list)} dataset_name"
+                )
+            dataset_info[dataset] = {
+                "hf_hub_url": dataset_full_name_list[i],
+                "formatting": "sharegpt",
+                "columns": {"messages": "conversations", "system": "system"},
+                "tags": {
+                    "role_tag": "from",
+                    "content_tag": "value",
+                    "user_tag": "user",
+                    "assistant_tag": "assistant",
+                },
+            }
+    with open(dataset_info_path, "w", encoding="utf-8") as f:
+        json.dump(dataset_info, f, indent=4)
+    delattr(args, "dataset_full_name")
+
     launch(args_dict)
