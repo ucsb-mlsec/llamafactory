@@ -122,9 +122,12 @@ if __name__ == "__main__":
 
     # if dataset is not in dataset_info, add it
     dataset_list = args.dataset.split(",")
-    dataset_full_name_list = (
-        args.dataset_full_name.split(",") if args.dataset_full_name else []
-    )
+    try:
+        dataset_full_name_list = args.dataset_full_name.split(",")
+        delattr(args, "dataset_full_name")
+
+    except AttributeError:
+        dataset_full_name_list = []
     dataset_info_path = Path(args.dataset_dir).resolve() / "dataset_info.json"
     if not dataset_info_path.exists():
         raise FileNotFoundError(f"{dataset_info_path} does not exist")
@@ -155,6 +158,5 @@ if __name__ == "__main__":
             }
     with open(dataset_info_path, "w", encoding="utf-8") as f:
         json.dump(dataset_info, f, indent=4)
-    delattr(args, "dataset_full_name")
 
     launch(args_dict)

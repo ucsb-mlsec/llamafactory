@@ -107,6 +107,16 @@
             "rejected": "rejected"
         }
     },
+    "VD-QWQ-Clean-8k_qwen2_7B_full_sft_1e-5_train_dpo": {
+        "hf_hub_url": "VD-QWQ-Clean-8k_qwen2_7B_full_sft_1e-5_train_dpo",
+        "ranking": true,
+        "formatting": "sharegpt",
+        "columns": {
+            "messages": "conversations",
+            "chosen": "chosen",
+            "rejected": "rejected"
+        }
+    },
     "My-VD-DS": {
         "file_name": "../vulllm/all_dataset/sky/deepseek-reasoner_train.json",
         "formatting": "sharegpt",
