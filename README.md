@@ -109,4 +109,7 @@ CUDA_VISIBLE_DEVICES=3 python -m torch.distributed.run --nnodes 1 --node_rank 0 
 
 ```shell
 python ../test/gpu_monitor.py --interval 30 --gpu_num 4 --percentage 92 "torchrun --nnodes 1 --node_rank 0 --nproc_per_node 4 --master_addr 127.0.0.1 --master_port 29500 train.py --model_name_or_path Qwen/Qwen2.5-7B-Instruct --run_name qwen2_7B_full_sft_1e-5 --dataset VD-QWQ-Clean-8k --push_to_hub --push_to_hub_organization secmlr"
+
+# dpo
+python ../test/gpu_monitor.py --interval 30 --gpu_num 4 --percentage 92 "torchrun --nnodes 1 --node_rank 0 --nproc_per_node 4 --master_addr 127.0.0.1 --master_port 29500 train.py --model_name_or_path secmlr/VD-DS-Clean-8k_VD-QWQ-Clean-8k_Qwen2.5-7B-Instruct_full_sft_1e-5 --run_name full --stage dpo --pref_beta 2.0 --simpo_gamma 0.3 --pref_loss simpo --dataset VD-DS-QWQ-Clean-8k_qwen2_7B_full_sft_1e-5_train_dpo --push_to_hub --push_to_hub_organization secmlr --cutoff_len 32768"
 ```

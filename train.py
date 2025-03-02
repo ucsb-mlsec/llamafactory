@@ -114,7 +114,12 @@ if __name__ == "__main__":
         for i in range(0, len(unknown_args), 2):
             key = unknown_args[i].lstrip("--")
             value = unknown_args[i + 1] if i + 1 < len(unknown_args) else True
-            extra_config[key] = value
+            if key in config:
+                # use the type of the default value
+                extra_config[key] = type(config[key])(value)
+            else:
+                # this is still an issue because we don't know the type and it will always be a str
+                extra_config[key] = value
         config.update(extra_config)
         args = argparse.Namespace(**config)
 
