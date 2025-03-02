@@ -100,9 +100,12 @@ if __name__ == "__main__":
                 f"./result/{dataset_name}/{model_short_name}_{args.run_name}"
             )
         if args.push_to_hub and not args.push_to_hub_model_id:
-            args.push_to_hub_model_id = (
-                f"{dataset_name}_{model_short_name}_{args.run_name}"
-            )
+            if "dpo" in dataset_name:
+                args.push_to_hub_model_id = f"dpo_{model_short_name}_{args.run_name}"
+            else:
+                args.push_to_hub_model_id = (
+                    f"{dataset_name}_{model_short_name}_{args.run_name}"
+                )
         for key, value in vars(args).items():
             if value is not None:
                 config[key] = value
