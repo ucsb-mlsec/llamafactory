@@ -118,7 +118,16 @@ if __name__ == "__main__":
                 # use the type of the default value
                 extra_config[key] = type(config[key])(value)
             else:
-                # this is still an issue because we don't know the type and it will always be a str
+                try:
+                    value = int(value)
+                except ValueError:
+                    try:
+                        value = float(value)
+                    except ValueError:
+                        try:
+                            value = bool(value)
+                        except ValueError:
+                            pass
                 extra_config[key] = value
         config.update(extra_config)
         args = argparse.Namespace(**config)
