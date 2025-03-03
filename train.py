@@ -18,7 +18,7 @@ DEFAULT_CONFIG_DICT = {
     "dataset_dir": "../data",
     "template": "qwen",
     "cutoff_len": 16384,
-    "max_samples": 1000000,
+    "max_samples": 15000,
     "overwrite_cache": True,
     "preprocessing_num_workers": 16,
     "logging_steps": 1,
@@ -124,10 +124,7 @@ if __name__ == "__main__":
                     try:
                         value = float(value)
                     except ValueError:
-                        try:
-                            value = bool(value)
-                        except ValueError:
-                            pass
+                        pass
                 extra_config[key] = value
         config.update(extra_config)
         args = argparse.Namespace(**config)
