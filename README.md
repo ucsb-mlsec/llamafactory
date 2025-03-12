@@ -42,7 +42,7 @@ train.py \
 --push_to_hub \
 --push_to_hub_organization secmlr
 
-# dataset: src/train/data/dataset_info.json, refer to VD-QWQ-Clean-8k
+# dataset: vulscan/train/data/dataset_info.json, refer to VD-QWQ-Clean-8k
 ```
 
 model_name_or_path, run_name and dataset are required. Besides, if output_dir is not specified, the training loges will
