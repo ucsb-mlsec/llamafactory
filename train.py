@@ -22,7 +22,7 @@ DEFAULT_CONFIG_DICT = {
     "overwrite_cache": True,
     "preprocessing_num_workers": 16,
     "logging_steps": 1,
-    "save_steps": 200,
+    "save_steps": 400,
     "plot_loss": True,
     "per_device_train_batch_size": 1,
     "gradient_accumulation_steps": 12,
