@@ -27,8 +27,36 @@
             "assistant_tag": "assistant"
         }
     },
+    "R-VD-QWQ-Clean-8k": {
+        "hf_hub_url": "secmlr/reduced_clean_dataset_filtered_QwQ-32B-Preview_train_len_8000_inputlen_5000",
+        "formatting": "sharegpt",
+        "columns": {
+            "messages": "conversations",
+            "system": "system"
+        },
+        "tags": {
+            "role_tag": "from",
+            "content_tag": "value",
+            "user_tag": "user",
+            "assistant_tag": "assistant"
+        }
+    },
     "VD-DS-Clean-8k": {
         "hf_hub_url": "secmlr/clean_dataset_filtered_together-deepseek-reasoner_train_len_8000_inputlen_5000",
+        "formatting": "sharegpt",
+        "columns": {
+            "messages": "conversations",
+            "system": "system"
+        },
+        "tags": {
+            "role_tag": "from",
+            "content_tag": "value",
+            "user_tag": "user",
+            "assistant_tag": "assistant"
+        }
+    },
+    "R-VD-DS-Clean-8k": {
+        "hf_hub_url": "secmlr/reduced_clean_dataset_filtered_together-deepseek-reasoner_train_len_8000_inputlen_5000",
         "formatting": "sharegpt",
         "columns": {
             "messages": "conversations",
@@ -57,6 +85,20 @@
     },
     "VD-QWQ-Noisy-Small-8k": {
         "hf_hub_url": "secmlr/noisy_dataset_filtered_QwQ-32B-Preview_small_train_len_8000_inputlen_5000",
+        "formatting": "sharegpt",
+        "columns": {
+            "messages": "conversations",
+            "system": "system"
+        },
+        "tags": {
+            "role_tag": "from",
+            "content_tag": "value",
+            "user_tag": "user",
+            "assistant_tag": "assistant"
+        }
+    },
+    "R-VD-QWQ-Noisy-Small-8k": {
+        "hf_hub_url": "secmlr/reduced_noisy_dataset_filtered_QwQ-32B-Preview_small_train_len_8000_inputlen_5000",
         "formatting": "sharegpt",
         "columns": {
             "messages": "conversations",
