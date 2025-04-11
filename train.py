@@ -17,7 +17,7 @@ DEFAULT_CONFIG_DICT = {
     "dataset": "Sky-T1-HF",
     "dataset_dir": "../data",
     "template": "qwen",
-    "cutoff_len": 16384,
+    "cutoff_len": 32768,
     "max_samples": 15000,
     "overwrite_cache": True,
     "preprocessing_num_workers": 16,
