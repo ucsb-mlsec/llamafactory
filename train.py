@@ -146,11 +146,12 @@ if __name__ == "__main__":
     if not dataset_info_path.exists():
         raise FileNotFoundError(f"{dataset_info_path} does not exist")
 
-    with open(dataset_info_path, "r", encoding="utf-8") as f:
+    with open(dataset_info_path, "r") as f:
         dataset_info = json.load(f)
-
+    flag = False
     for i, dataset in enumerate(dataset_list):
         if dataset not in dataset_info:
+            flag = True
             if not dataset_full_name_list:
                 raise ValueError(
                     f"dataset {dataset} is not found in data/dataset_info.json, you need to provide dataset_name as huggingface url or file name"
@@ -170,7 +171,8 @@ if __name__ == "__main__":
                     "assistant_tag": "assistant",
                 },
             }
-    with open(dataset_info_path, "w", encoding="utf-8") as f:
-        json.dump(dataset_info, f, indent=4)
+    if flag:
+        with open(dataset_info_path, "w") as f:
+            json.dump(dataset_info, f, indent=4)
 
     launch(args_dict)
