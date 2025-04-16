@@ -269,7 +269,7 @@
             "assistant_tag": "assistant"
         }
     },
-    "DS-Noisy-32k": {
+    "DS-Noisy": {
         "hf_hub_url": "secmlr/noisy_dataset_ds_correct_together-deepseek-reasoner_small_train_len_32000_inputlen_16000",
         "formatting": "sharegpt",
         "columns": {
@@ -283,7 +283,7 @@
             "assistant_tag": "assistant"
         }
     },
-    "DS-Clean-32k": {
+    "DS-Clean": {
         "hf_hub_url": "secmlr/clean_dataset_ds_correct_together-deepseek-reasoner_train_len_32000_inputlen_16000",
         "formatting": "sharegpt",
         "columns": {
@@ -297,7 +297,7 @@
             "assistant_tag": "assistant"
         }
     },
-    "DS-OSS-32k": {
+    "DS-OSS": {
         "hf_hub_url": "secmlr/ossfuzz_dataset_ds_correct_together-deepseek-reasoner_train_len_32000_inputlen_16000",
         "formatting": "sharegpt",
         "columns": {
@@ -311,7 +311,7 @@
             "assistant_tag": "assistant"
         }
     },
-    "QWQ-OSS-32k": {
+    "QWQ-OSS": {
         "hf_hub_url": "secmlr/ossfuzz_dataset_ds_correct_QwQ-32B_train_len_32000_inputlen_16000",
         "formatting": "sharegpt",
         "columns": {
@@ -325,7 +325,7 @@
             "assistant_tag": "assistant"
         }
     },
-    "QWQ-Clean-32k": {
+    "QWQ-Clean": {
         "hf_hub_url": "secmlr/clean_dataset_ds_correct_QwQ-32B_train_len_32000_inputlen_16000",
         "formatting": "sharegpt",
         "columns": {
@@ -339,7 +339,7 @@
             "assistant_tag": "assistant"
         }
     },
-    "QWQ-Noisy-32k": {
+    "QWQ-Noisy": {
         "hf_hub_url": "secmlr/noisy_dataset_ds_correct_QwQ-32B_small_train_len_32000_inputlen_16000",
         "formatting": "sharegpt",
         "columns": {
@@ -353,7 +353,7 @@
             "assistant_tag": "assistant"
         }
     },
-    "QWQ-Noisy-D-32k": {
+    "QWQ-Noisy-D": {
         "hf_hub_url": "secmlr/noisy_dataset_ds_correct_direct_QwQ-32B_small_train_len_32000_inputlen_16000",
         "formatting": "sharegpt",
         "columns": {
@@ -367,7 +367,7 @@
             "assistant_tag": "assistant"
         }
     },
-    "QWQ-Clean-D-32k": {
+    "QWQ-Clean-D": {
         "hf_hub_url": "secmlr/clean_dataset_ds_correct_direct_QwQ-32B_train_len_32000_inputlen_16000",
         "formatting": "sharegpt",
         "columns": {
@@ -381,7 +381,7 @@
             "assistant_tag": "assistant"
         }
     },
-    "QWQ-OSS-D-32k": {
+    "QWQ-OSS-D": {
         "hf_hub_url": "secmlr/ossfuzz_dataset_ds_correct_direct_QwQ-32B_train_len_32000_inputlen_16000",
         "formatting": "sharegpt",
         "columns": {
