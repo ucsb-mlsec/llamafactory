@@ -576,5 +576,33 @@
             "user_tag": "user",
             "assistant_tag": "assistant"
         }
+    },
+    "DS-RED": {
+        "hf_hub_url": "secmlr/redteam_dataset_ds_correct_together-deepseek-reasoner_train_len_32000_inputlen_16000",
+        "formatting": "sharegpt",
+        "columns": {
+            "messages": "conversations",
+            "system": "system"
+        },
+        "tags": {
+            "role_tag": "from",
+            "content_tag": "value",
+            "user_tag": "user",
+            "assistant_tag": "assistant"
+        }
+    },
+    "QWQ-RED": {
+        "hf_hub_url": "secmlr/redteam_dataset_ds_correct_QwQ-32B_train_len_32000_inputlen_16000",
+        "formatting": "sharegpt",
+        "columns": {
+            "messages": "conversations",
+            "system": "system"
+        },
+        "tags": {
+            "role_tag": "from",
+            "content_tag": "value",
+            "user_tag": "user",
+            "assistant_tag": "assistant"
+        }
     }
 }
