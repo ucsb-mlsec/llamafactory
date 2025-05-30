@@ -604,5 +604,33 @@
             "user_tag": "user",
             "assistant_tag": "assistant"
         }
+    },
+    "DS-JAVA": {
+        "hf_hub_url": "secmlr/clean_dataset_ds_correct_together-deepseek-reasoner_java_len_32000_inputlen_16000",
+        "formatting": "sharegpt",
+        "columns": {
+            "messages": "conversations",
+            "system": "system"
+        },
+        "tags": {
+            "role_tag": "from",
+            "content_tag": "value",
+            "user_tag": "user",
+            "assistant_tag": "assistant"
+        }
+    },
+    "QWQ-JAVA": {
+        "hf_hub_url": "secmlr/clean_dataset_ds_correct_QwQ-32B_java_len_32000_inputlen_16000",
+        "formatting": "sharegpt",
+        "columns": {
+            "messages": "conversations",
+            "system": "system"
+        },
+        "tags": {
+            "role_tag": "from",
+            "content_tag": "value",
+            "user_tag": "user",
+            "assistant_tag": "assistant"
+        }
     }
 }
